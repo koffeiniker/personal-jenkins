@@ -22,7 +22,11 @@ Run this at home. We solve the webhook-matter using some Internet Service, so yo
 
 The setup runs in phases:
 
-- You are responsible to build you hardware and install Ubuntu Server (mininal) on it. You will need Internet-Connection. Once you got this, this little project kicks in.
-- A few manual configuration will be made.
+- You are responsible to build your hardware and install Ubuntu Server (mininal) on it. You will need Internet-Connection. Once you got this ready, this little project kicks in.
+- Some manual configurations will be required.
 - An Ansible-playbook will do the main work.
 - Some config in the Jenkins will complete the box.
+
+## Goals
+
+In the end I will have a Jenkins running on a Box in my home/office. It requires Internet, but it does not require to be reachable from the Internet. The box will be reasonable secure and somewhat hardened. I will be able to receive notifications (webhooks) from Github or alike to initiate builds when code is pushed. Jenkins will build using docker containers which give me maximum freedom in tailoring my build-environment. Where Jenkins puts the build-artefacts is absolutely free to choose. For my own part: I will use this for mkdocs and hugo to generate websites from code. Webspace is cheap, github is reachable from everywhere, build and deployment is automated, then, and I assume site generators to be way more secure than any CMS. Many reasons to do this little project.
