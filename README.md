@@ -1,6 +1,6 @@
 # Personal Jenkins
 
-__ This is work in progress, actually at its very beginning. Please be patient! Completion might take weeks. __
+**This is work in progress, actually at its very beginning. Please be patient! Completion might take weeks.**
 
 This repo is meant to implement a Jenkins for personal use on Ubuntu Server.
 
