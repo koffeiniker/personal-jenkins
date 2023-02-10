@@ -4,7 +4,9 @@
 
 This repo is meant to implement a Jenkins for personal use on Ubuntu Server.
 
-I start with using Ubuntu Server 22.04 (minimal).
+## Tasks at hand
+
+- Install and test docker-compose (including the classic cli so ansible can deal with it)
 
 ## The idea ...
 
