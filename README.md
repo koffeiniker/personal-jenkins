@@ -30,3 +30,25 @@ The setup runs in phases:
 ## Goals
 
 In the end I will have a Jenkins running on a Box in my home/office. It requires Internet, but it does not require to be reachable from the Internet. The box will be reasonable secure and somewhat hardened. I will be able to receive notifications (webhooks) from Github or alike to initiate builds when code is pushed. Jenkins will build using docker containers which give me maximum freedom in tailoring my build-environment. Where Jenkins puts the build-artefacts is absolutely free to choose. For my own part: I will use this for mkdocs and hugo to generate websites from code. Webspace is cheap, github is reachable from everywhere, build and deployment is automated, then, and I assume site generators to be way more secure than any CMS. Many reasons to do this little project.
+
+## System
+
+The playbook is made for Ubuntu 22.04 Server LTS. I assume the full server install, though the minimal install might work as well. In a later phase I will add a shell-script to add missing packages for the minimal install.
+
+## The playbook
+
+### Upgrades
+
+At first some packages will be updated if necessary. These would have initially been installed manuall or via a shell-script.
+
+### Docker via the original docker-repository
+
+This part will:
+
+  - register Docker's repo key
+  - add Docker's repo
+  - install docker-ce
+
+This part is comprised in the docker-role.
+
+
