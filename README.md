@@ -6,7 +6,7 @@ This repo is meant to implement a Jenkins for personal use on Ubuntu Server.
 
 ## Tasks at hand
 
-- Install and test docker-compose (including the classic cli so ansible can deal with it)
+- Create a working compose-file and install a Caddy-proxy
 
 ## The idea ...
 

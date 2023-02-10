@@ -19,6 +19,7 @@
     name:
       - docker-ce
       - docker-compose
+      - docker-compose-plugin
     state: latest
     update_cache: true
   become: true
