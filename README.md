@@ -53,4 +53,20 @@ This part will:
 
 This part is comprised in the docker-role.
 
+### Fixes to the admin user
+
+The admin user (default: prefect) will be added to the docker group and the alias play will be configured.
+
+### jkagent user
+
+The jkagent user will be configured to be an agent with docker support. The user will be created by ansible, but the integration as agent to Jenkins remains a manual task:
+
+  - create an access key pair for SSH in Jenkins
+  - add the public key to the authorized keys of the user
+
+The user will already be added to the docker group.
+
+### OpenJDK
+
+OpenJDK is required to have an avtive agent.
 
