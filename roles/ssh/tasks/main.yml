@@ -1,0 +1,50 @@
+---
+
+- name: Forbid root login on ssh
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin '
+    line: 'PermitRootLogin no'
+    insertafter: '^#PermitRootLogin'
+    state: present
+  notify: Restart SSHD
+  become: true
+  tags:
+    - norootssh
+    - ssh
+
+- name: Forbid password authentication
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication '
+    line: 'PasswordAuthentication no'
+    insertafter: '^#PasswordAuthentication'
+    state: present
+  notify: Restart SSHD
+  become: true
+  tags:
+    - nopasswordssh
+    - ssh
+
+- name: We need to have a group ssh-users
+  group:
+    name: ssh-users
+    state: present
+  become: true
+  tags:
+    - ssh
+
+- name: Limit the use of ssh to members of group ssh-users
+  template:
+    src: group.template
+    dest: /etc/ssh/sshd_config.d/group.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+  notify: Restart SSHD
+  tags:
+    - sshgroup
+    - ssh
+
+
