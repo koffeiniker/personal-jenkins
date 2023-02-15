@@ -11,3 +11,30 @@
         name: python3-pip
         state: latest
       become: true
+
+    - name: Add prefect to the docker group
+      user:
+        name: prefect
+        groups: docker
+        append: true
+      become: true
+      tags:
+        - group
+
+    - name: Add some convenience aliases for bash
+      lineinfile:
+        path: ~/.bash_aliases
+        regex: "^alias play="
+        line: "alias play=ansible-playbook"
+        owner: prefect
+        group: prefect
+        mode: '0644'
+        create: yes
+
+    - name: Create the agent user
+      user:
+        name: jkagent
+        comment: "Jenkins Agent"
+        groups: docker
+      become: true
+
