@@ -4,6 +4,7 @@
 
   roles:
     - docker
+    - ssh
 
   tasks:
     - name: Update pip
@@ -15,7 +16,9 @@
     - name: Add prefect to the docker group
       user:
         name: prefect
-        groups: docker
+        groups:
+          - docker
+          - ssh-users
         append: true
       become: true
       tags:
@@ -35,6 +38,8 @@
       user:
         name: jkagent
         comment: "Jenkins Agent"
-        groups: docker
+        groups: 
+          - docker
+          - ssh-users
       become: true
 
