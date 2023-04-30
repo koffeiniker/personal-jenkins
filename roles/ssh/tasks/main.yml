@@ -47,4 +47,16 @@
     - sshgroup
     - ssh
 
+- name: Create the config directory for the main user
+  file:
+    state: directory
+    path: ~/.ssh/config.d
 
+- name: Add an include directive for that directory to ssh's config
+  lineinfile:
+    path: ~/.ssh/config
+    regexp: "^Include ~/.ssh/config.d/"
+    line: "Include ~/.ssh/config.d/*"
+    insertbefore: "BOF"
+    mode: "0644"
+    create: true
