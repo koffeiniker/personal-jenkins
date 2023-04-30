@@ -1,0 +1,5 @@
+Host jks
+	User jkserv
+	Hostname localhost
+	IdentityFile ~/.ssh/id_rsa_jkserv
+

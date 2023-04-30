@@ -1,0 +1,39 @@
+---
+
+- name: Create the user
+  user:
+    name: jkserv
+    comment: "Jenkins Service"
+    groups: 
+      - docker
+      - ssh-users
+  become: true
+
+- name: Create the .ssh directory
+  file:
+    path: ~jkserv/.ssh
+    state: directory
+    owner: jkserv
+    group: jkserv
+    mode: "0755"
+  become: true
+
+- name: Generate a dedicated keypair
+  community.crypto.openssh_keypair:
+    path: ~/.ssh/id_rsa_jkserv
+
+- name: Copy the ssh key to authorized keys
+  copy:
+    src: "{{ ansible_facts['user_dir'] }}/.ssh/id_rsa_jkserv.pub"
+    remote_src: true
+    dest: ~jkserv/.ssh/authorized_keys
+    owner: jkserv
+    group: jkserv
+    mode: "0644"
+  become: true
+
+- name: Copy the template for the config file
+  template:
+    src: ssh_config.template
+    dest: ~/.ssh/config.d/jkserv
+    mode: "0644"
