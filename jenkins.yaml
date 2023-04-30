@@ -4,7 +4,13 @@
 
   roles:
     - docker
-    - ssh
+    - role: ssh
+      tags: [ ssh ]
+    - role: git
+      tags: [ git ]
+    - fail2ban
+    - role: jenkins
+      tags: [ jk ]
 
   tasks:
     - name: Update pip
@@ -38,6 +44,21 @@
       user:
         name: jkagent
         comment: "Jenkins Agent"
+        groups: 
+          - docker
+          - ssh-users
+      become: true
+
+    - name: Install a default JDK so the agent can work
+      apt:
+        name: default-jdk
+        state: latest
+      become: true
+
+    - name: Create the jkserv user
+      user:
+        name: jkserv
+        comment: "Jenkins Service"
         groups: 
           - docker
           - ssh-users
