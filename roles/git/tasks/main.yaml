@@ -1,0 +1,11 @@
+---
+
+- name: Generate a dedicated keypair
+  community.crypto.openssh_keypair:
+    path: ~/.ssh/id_rsa_git
+
+- name: Copy the template for the config file
+  template:
+    src: ssh_config.template
+    dest: ~/.ssh/config.d/git
+    mode: "0644"
