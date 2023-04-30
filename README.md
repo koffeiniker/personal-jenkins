@@ -66,7 +66,19 @@ The jkagent user will be configured to be an agent with docker support. The user
 
 The user will already be added to the docker group.
 
+### SSH and fail2ban
+
+Two roles will harden SSH to:
+
+  - only allow pubkey authentication (no username/password via SSH)
+  - only allow login to users that are members of group ssh-users
+  - use fail2ban to lock out users trying a brute force attack
+
+An explicit restart of the daemon is still missing. Somehow it seems to be inactive after install.
+
+I see no need to tighten the ruleset for fail2ban as this device is local anyway and usually not exposed to the Internet.
+
 ### OpenJDK
 
-OpenJDK is required to have an avtive agent.
+OpenJDK is required to have an agent.
 
