@@ -11,21 +11,6 @@
     - fail2ban
     - role: jenkins
       tags: [ jk ]
-    - role: service-user
-      tags: [ svc ]
-      vars:
-        svc:
-          name: don
-          user: don
-          desc: "Miami Vice"
-      tags: miami
-    - role: service-user
-      vars:
-        svc:
-          name: dudeldidu
-          user: dudel
-          desc: "Jodler des Tages"
-      tags: [ jodel ]
 
   tasks:
     - name: Update pip
@@ -68,15 +53,6 @@
       apt:
         name: default-jdk
         state: latest
-      become: true
-
-    - name: Create the jkserv user
-      user:
-        name: jkserv
-        comment: "Jenkins Service"
-        groups: 
-          - docker
-          - ssh-users
       become: true
 
     - name: Add some tools for my development
