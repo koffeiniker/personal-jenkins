@@ -20,7 +20,7 @@
     mode: "0755"
   become: true
 
-- name: Generate a dedicated keypair
+- name: "{{ svc.name }} : Generate a dedicated keypair"
   community.crypto.openssh_keypair:
     path: "~/.ssh/id_rsa_{{ svc.user }}"
 
