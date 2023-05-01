@@ -11,7 +11,7 @@
       - ssh-users
   become: true
 
-- name: Create the .ssh directory
+- name: "{{ svc.name }} : Create the .ssh directory"
   file:
     path: "~{{ svc.user }}/.ssh"
     state: directory
@@ -24,7 +24,7 @@
   community.crypto.openssh_keypair:
     path: "~/.ssh/id_rsa_{{ svc.user }}"
 
-- name: Copy the ssh key to authorized keys
+- name: "{{ svc.name }} : Copy the ssh key to authorized keys"
   copy:
     src: "{{ ansible_facts['user_dir'] }}/.ssh/id_rsa_{{ svc.user }}.pub"
     remote_src: true
@@ -34,7 +34,7 @@
     mode: "0644"
   become: true
 
-- name: Copy the template for the config file
+- name: "{{ svc.name }} : Copy the template for the config file"
   template:
     src: ssh_config.template
     dest: "~/.ssh/config.d/{{ svc.user }}"
