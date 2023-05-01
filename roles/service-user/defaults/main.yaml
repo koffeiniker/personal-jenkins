@@ -1,0 +1,6 @@
+---
+
+svc:
+  user: svc
+  name: svc
+  desc: "Service User"

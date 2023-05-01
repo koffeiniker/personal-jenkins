@@ -11,6 +11,21 @@
     - fail2ban
     - role: jenkins
       tags: [ jk ]
+    - role: service-user
+      tags: [ svc ]
+      vars:
+        svc:
+          name: don
+          user: don
+          desc: "Miami Vice"
+      tags: miami
+    - role: service-user
+      vars:
+        svc:
+          name: dudeldidu
+          user: dudel
+          desc: "Jodler des Tages"
+      tags: [ jodel ]
 
   tasks:
     - name: Update pip
@@ -64,3 +79,10 @@
           - ssh-users
       become: true
 
+    - name: Add some tools for my development
+      apt:
+        name:
+          - vim
+          - mc
+      become: true
+      tags: tools

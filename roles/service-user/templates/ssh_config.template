@@ -1,0 +1,5 @@
+Host {{ svc.name }}
+	User {{ svc.user }}
+	Hostname localhost
+	IdentityFile ~/.ssh/id_rsa_{{ svc.user }}
+

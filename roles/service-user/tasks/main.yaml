@@ -1,0 +1,41 @@
+---
+
+- name: "{{ svc.name }} : Create the user"
+  user:
+    name: "{{ svc.user }}"
+    comment: "{{ svc.desc }}"
+    shell: /bin/bash
+    password: '!'
+    groups: 
+      - docker
+      - ssh-users
+  become: true
+
+- name: Create the .ssh directory
+  file:
+    path: "~{{ svc.user }}/.ssh"
+    state: directory
+    owner: "{{ svc.user }}"
+    group: "{{ svc.user }}"
+    mode: "0755"
+  become: true
+
+- name: Generate a dedicated keypair
+  community.crypto.openssh_keypair:
+    path: "~/.ssh/id_rsa_{{ svc.user }}"
+
+- name: Copy the ssh key to authorized keys
+  copy:
+    src: "{{ ansible_facts['user_dir'] }}/.ssh/id_rsa_{{ svc.user }}.pub"
+    remote_src: true
+    dest: "~{{ svc.user }}/.ssh/authorized_keys"
+    owner: "{{ svc.user }}"
+    group: "{{ svc.user }}"
+    mode: "0644"
+  become: true
+
+- name: Copy the template for the config file
+  template:
+    src: ssh_config.template
+    dest: "~/.ssh/config.d/{{ svc.user }}"
+    mode: "0644"
