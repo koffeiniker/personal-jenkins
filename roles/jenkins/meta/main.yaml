@@ -2,3 +2,9 @@
 
 dependencies:
   - role: ssh
+  - role: service-user
+    var:
+      svc:
+        name: jenkins
+        user: jksvc
+        desc: "Jenkins Service"
